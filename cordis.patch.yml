@@ -1,0 +1,37 @@
+# DSH bundle patch — dsh-cron-guard
+#
+# 定时唤醒治理：插队、过期作废、同源合并、审批超时。
+# 不改 app.asar：全部通过 agent/inbox/inserted 与 approval/request 两个
+# 事件钩子完成（inserted 在 send() 里先于 wakeDriver() 同步触发）。
+
+- insert:
+    - id: cron-guard
+      name: dsh-cron-guard
+      config:
+        enabled: true
+        # 上线前建议先设 true 观察一轮日志，确认解析与判定符合预期。
+        dryRun: false
+
+        # 【收益最大】会话忙时把唤醒从 next-turn 改投 next-step。
+        # 等一个 step（中位 11.9s）而不是等一整个 turn（BOSS 中位 166s / p90 1542s）。
+        relocateToNextStep: true
+
+        # 用户消息永远优先：next-turn 里有用户消息时就先让路，不插队。
+        yieldToUser: true
+
+        # 唤醒迟到超过 10 分钟就丢弃，切断「堆积→越跑越慢」的正反馈。
+        # 0 = 关闭。
+        staleSkipMs: 600000
+
+        # 同一 schedule_id 在 10 分钟窗口内只保留最新一条（SQS 同组覆盖语义）。
+        # 0 = 关闭。
+        dedupeWindowMs: 600000
+
+        # 审批超过 15 分钟未决就按 rejected 收口。
+        # 本机曾因一次审批挂起 8.2 小时，连带 4 条唤醒排队。
+        # 0 = 关闭。
+        approvalTimeoutMs: 900000
+
+        # 只治理这些来源的消息。schedule 是 DSH 定时任务的唯一来源标记。
+        sourceKinds:
+          - schedule
