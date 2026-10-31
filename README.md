@@ -1,7 +1,7 @@
 # dsh-cron-guard
 
 <!-- badges:start -->
-[![Stars](https://img.shields.io/github/stars/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/stargazers) [![Forks](https://img.shields.io/github/forks/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/network/members) [![Last commit](https://img.shields.io/github/last-commit/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/commits/main)
+[![Stars](https://img.shields.io/github/stars/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/stargazers) [![Forks](https://img.shields.io/github/forks/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/network/members) [![Last commit](https://img.shields.io/github/last-commit/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/commits/main) [![License](https://img.shields.io/github/license/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/blob/main/LICENSE) [![Language](https://img.shields.io/github/languages/top/monkey-sking/dsh-cron-guard?style=flat-square)](https://github.com/monkey-sking/dsh-cron-guard/search?l=)
 <!-- badges:end -->
 
 治理 DSH 的定时唤醒：**不必等当前对话跑完**，同时丢掉过期的、合并重复的、给卡住的审批收口。
